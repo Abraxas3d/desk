@@ -1,0 +1,65 @@
+//Dragon Desk
+//by Abraxas3d
+//10 May 2015
+
+//dimensions of lumber used
+//2x4 is really 1.5 by 3.5
+board_thickness = 1.5; //in inches
+board_width = 3.5; //in inches
+
+//dimensions of the cage
+side = 30; //in inches, the dimensions of the sides of the cage
+height = 30; //in inches, the height of the cage
+shelf_height = 0; //in inches, the height of lower sides and lower front (or back). For optional shelving. Leave at zero for braces that are on floor level. 
+
+//zoltar cage model
+//Vertical struts
+translate([board_thickness*25.4, board_thickness*25.4, side*25.4])cube(size = [board_thickness*25.4, board_width*25.4, height*25.4], center = false); //front right
+echo("dimensions are in inches");
+echo("dimensions of lumber used is ", board_thickness, "by", board_width)
+echo("front right vertical post:", height);
+
+translate([(side*25.4 - 2*board_thickness*25.4), board_thickness*25.4, side*25.4])cube(size = [board_thickness*25.4, board_width*25.4, height*25.4], center = false); //front left
+echo("front left vertical post:", height);
+
+translate([board_thickness*25.4, 25.4*(side - board_width - board_thickness), side*25.4])cube(size = [board_thickness*25.4, board_width*25.4, height*25.4], center = false); //right rear
+echo("right rear vertical post:", height);
+
+translate([(side*25.4 - 2*board_thickness*25.4), 25.4*(side - board_width - board_thickness), side*25.4])cube(size = [board_thickness*25.4, board_width*25.4, height*25.4], center = false); //left rear
+echo("left rear vertical post:", height);
+
+
+//Fronts and backs
+translate([board_thickness*25.4,0,25.4*(side + shelf_height)])cube(size = [25.4*(side - 2*board_thickness), board_thickness*25.4, board_width*25.4], center = false); //bottom front
+echo("bottom front horizontal spacer:", side - 2*board_thickness);
+
+//special case - removed for walk-in construction
+//echo("bottom rear horizontal spacer:", side - 2*board_thickness);
+
+translate([board_thickness*25.4,0,(side*25.4 + height*25.4 - board_width*25.4)])cube(size = [(side*25.4 - 2*board_thickness*25.4), board_thickness*25.4, board_width*25.4], center = false); //upper front
+echo("upper front horizontal spacer:", side - 2*board_thickness);
+
+translate([board_thickness*25.4, 25.4*(side - board_thickness), (side*25.4 + height*25.4 - board_width*25.4)])cube(size = [(side*25.4 - 2*board_thickness*25.4), board_thickness*25.4, board_width*25.4], center = false); //upper back
+echo("upper back horizontal spacer:", side - 2*board_thickness);
+
+
+//sides
+translate([0,0,25.4*(side + shelf_height)])cube(size = [board_thickness*25.4, side*25.4, board_width*25.4], center = false); //bottom right
+echo("bottom right side strut:", side);
+
+translate([25.4*(side - board_thickness),0,25.4*(side + shelf_height)])cube(size = [board_thickness*25.4, side*25.4, board_width*25.4], center = false); //bottom left
+echo("bottom left side strut:", side);
+
+translate([0,0,(side*25.4 + height*25.4 - board_width*25.4)])cube(size = [board_thickness*25.4, side*25.4, board_width*25.4], center = false); //top right
+echo("top right side strut:", side);
+
+translate([25.4*(side - board_thickness),0,(side*25.4 + height*25.4 - board_width*25.4)])cube(size = [board_thickness*25.4, side*25.4, board_width*25.4], center = false); //top left
+echo("top left side strut:", side);
+
+
+//braces
+translate([board_thickness*25.4, 25.4*(side - board_thickness), 25.4*(side + shelf_height)])cube(size = [(board_thickness*25.4), board_thickness*25.4, board_width*25.4], center = false); //back lower right
+echo("back lower right brace:", board_thickness);
+
+translate([(side - 2*board_thickness)*25.4, 25.4*(side - board_thickness), 25.4*(side + shelf_height)])cube(size = [(board_thickness*25.4), board_thickness*25.4, board_width*25.4], center = false); //back lower left
+echo("back lower left brace:", board_thickness);
